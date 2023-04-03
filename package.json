@@ -1,0 +1,23 @@
+{
+  "name": "askhere",
+  "version": "1.0.0",
+  "description": "Plataforma de perguntas e respostas.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JonathasRosa/AskHere.git"
+  },
+  "author": "Jonathas Rosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JonathasRosa/AskHere/issues"
+  },
+  "homepage": "https://github.com/JonathasRosa/AskHere#readme",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
+  }
+}
