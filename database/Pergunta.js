@@ -15,4 +15,6 @@ const Pergunta = connection.define("perguntas", {//Defnição dos campus da tabe
 //Aqui passo a informação para a tabela ser criada.
 Pergunta.sync({ force: false }).then(() => {
     console.log("Tabela criada!")
-})
+});
+
+module.exports = Pergunta; 
