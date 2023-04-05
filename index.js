@@ -24,7 +24,14 @@ app.use(bodyParser.json);
 
 //ROTAS
 app.get("/", (req, res) => {
-    res.render("index");
+    Pergunta.findAll({
+        raw: true, order: [
+        "id","DESC"//ASC = crescente || DESC = Decrescente
+    ]}).then(perguntas => {
+        res.render("index", {
+            perguntas: perguntas
+        });
+    })
 });
 
 app.get("/perguntas", (req, res) => {
@@ -39,6 +46,21 @@ app.post("/salvarpergunta", (req, res) => {
         descricao: descricao
     }).then(() => {
         res.redirect("/");
+    })
+});
+
+app.get("/pergunta/:id", (req, res) => {
+    var id = req.params.id;
+    Pergunta.findOne({
+        where: { id: id }
+    }).then(pergunta => {
+        if (pergunta != undefined) {//Pergunta encontrada
+            res.render("pergunta.ejs", {
+                pergunta: pergunta
+            });
+        } else {//Pergunta não encontrada
+            res.redirect("/");
+        }
     })
 });
 
