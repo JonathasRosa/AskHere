@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const connection = require("./database/database.js");
+const connection = require("./database/database.js");//ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '01501309374JRosa'
 const Pergunta = require("./database/Pergunta.js");
 
 //Database
