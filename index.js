@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const connection = require("./database/database.js");//ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '01501309374JRosa'
 const Pergunta = require("./database/Pergunta.js");
-
+const Resposta = require("./database/Resposta.js");
 //Database
 connection
     .authenticate()
@@ -55,13 +55,31 @@ app.get("/pergunta/:id", (req, res) => {
         where: { id: id }
     }).then(pergunta => {
         if (pergunta != undefined) {//Pergunta encontrada
-            res.render("pergunta.ejs", {
-                pergunta: pergunta
+            Resposta.findAll({
+                where: { perguntaId: pergunta.id },
+                order: [
+                    ["id", "DESC"]
+                ]
+            }).then(respostas => {
+                res.render("pergunta.ejs", {
+                    pergunta: pergunta,
+                    respostas: respostas
+                });
             });
         } else {//Pergunta não encontrada
             res.redirect("/");
         }
-    })
+    });
 });
 
+app.post("/responder", (req, res) => {
+    var corpo = req.body.corpo;
+    var perguntaId = req.body.pergunta;
+    Resposta.create({
+        corpo: corpo,
+        perguntaId: perguntaId
+    }).then(() => {
+        res.redirect("/pergunta/"+perguntaId);
+    })
+});
 app.listen(8080, () => { console.log("App rodando!") });
