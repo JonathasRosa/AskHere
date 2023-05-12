@@ -1,2 +1,2 @@
 # AskHere
- Plataforma de perguntas e respostas
+ Plataforma de perguntas e respostas com Node.JS
